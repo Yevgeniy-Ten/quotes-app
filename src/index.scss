@@ -1,5 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
 
+body {
+  background-color: #343a40 !important;
+}
+
 .loader-bg {
   position: fixed;
   left: 0;

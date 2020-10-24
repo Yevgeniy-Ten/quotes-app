@@ -16,7 +16,7 @@ const AppNav = () => {
                 <NavDropdown title="Quotes Category" id="basic-nav-dropdown">
                     <Link className="dropdown-item" to="/quotes/humor">Humor</Link>
                     <Link className="dropdown-item" to="/quotes/motivation">Motivation</Link>
-                    <Link className="dropdown-item" to="/quotes/star-wars">Star Wars</Link>
+                    <Link className="dropdown-item" to="/quotes/avengers">Avengers</Link>
                     <NavDropdown.Divider/>
                     <Link className="dropdown-item" to="/quotes/saying">Saying</Link>
                     <Link className="dropdown-item" to="/quotes/famous-people">Famous People</Link>

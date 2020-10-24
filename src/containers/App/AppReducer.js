@@ -9,6 +9,7 @@ const handlers = {
 }
 
 export const AppReducer = (state, action) => {
+    debugger
     const handle = handlers[action.type] || handlers.DEFAULT
     return handle(state, action)
 }

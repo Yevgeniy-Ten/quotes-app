@@ -1,5 +1,8 @@
 import axios from "axios"
 
-const instanse = axios.create({})
+const BASE_URL = "https://for-test-48a0e.firebaseio.com/"
+const instanse = axios.create({
+    baseURL: BASE_URL
+})
 
 export default instanse

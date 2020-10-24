@@ -18,9 +18,11 @@ const AppProvider = ({children}) => {
         })
     }
     const hideAlert = () => {
-        dispatch({
-            type: HIDE_ALERT,
-        })
+        if (state.alertIsShow) {
+            dispatch({
+                type: HIDE_ALERT,
+            })
+        }
     }
     const showLoad = () => {
         dispatch({
@@ -32,7 +34,12 @@ const AppProvider = ({children}) => {
             type: HIDE_LOAD,
         })
     }
-    return <AppContext.Provider value={{state, hideAlert, showAlert, showLoad, hideLoad}}>
+    const createQuoteData = (author, category, description) => {
+        return {
+            category, author, description, date: new Date().toLocaleDateString()
+        }
+    }
+    return <AppContext.Provider value={{state, hideAlert, showAlert, showLoad, hideLoad, createQuoteData}}>
         {children}
     </AppContext.Provider>
 }
