@@ -6,6 +6,7 @@ import AppNav from "../../components/AppNav/AppNav";
 import {Container} from "react-bootstrap";
 import {Switch, Route, Redirect} from "react-router-dom"
 import AddQuote from "../../pages/AddQuote/AddQoute";
+import Quotes from "../../pages/Quotes/Quotes";
 
 function App() {
     return (
@@ -17,6 +18,8 @@ function App() {
                     <AppLoader/>
                     <Switch>
                         <Route path="/add-quote" component={AddQuote}/>
+                        <Route path="/quotes" exact component={Quotes}/>
+                        <Redirect from={"/" || ""} to="/quotes"/>
                     </Switch>
                 </Container>
             </AppProvider>

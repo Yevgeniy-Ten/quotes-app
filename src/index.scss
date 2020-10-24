@@ -4,6 +4,13 @@ body {
   background-color: #343a40 !important;
 }
 
+.edit-btn {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  background-image: url("./uploads/edit-i.svg");
+}
+
 .loader-bg {
   position: fixed;
   left: 0;

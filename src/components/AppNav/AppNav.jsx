@@ -12,7 +12,6 @@ const AppNav = () => {
             <Nav className="mx-auto">
                 <NavLink to="/quotes" className="nav-link">Quotes</NavLink>
                 <NavLink to="/add-quote" className="nav-link">Submit new quote</NavLink>
-                <NavLink to="/about" className="nav-link">About</NavLink>
                 <NavDropdown title="Quotes Category" id="basic-nav-dropdown">
                     <Link className="dropdown-item" to="/quotes/humor">Humor</Link>
                     <Link className="dropdown-item" to="/quotes/motivation">Motivation</Link>
@@ -21,6 +20,7 @@ const AppNav = () => {
                     <Link className="dropdown-item" to="/quotes/saying">Saying</Link>
                     <Link className="dropdown-item" to="/quotes/famous-people">Famous People</Link>
                 </NavDropdown>
+                <NavLink to="/about" className="nav-link">About</NavLink>
             </Nav>
         </Navbar.Collapse>
     </Navbar>

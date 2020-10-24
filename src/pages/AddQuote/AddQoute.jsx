@@ -23,7 +23,7 @@ const AddQuote = () => {
         const isValidInputs = validString(authorInput.value) && validString(quoteInput.value)
         if (isValidInputs) {
             showLoad()
-            const data = createQuoteData(categoryInput.value, authorInput.value, quoteInput.value)
+            const data = createQuoteData(authorInput.value, categoryInput.value, quoteInput.value)
             axios.post("/quotes.json", data).then(() => {
                 showAlert("You create new quote!, Congratulations", "success")
                 authorInput.clear()

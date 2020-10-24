@@ -1,13 +1,11 @@
-import noImg from "../uploads/no-img.png"
-
 export const validString = (string) => {
     return string ? string.trim().length > 0 : false
 }
 export const handlerDataFromDB = (data) => {
-    return Object.keys(data).map(id => {
+    return Object.keys(data).map((id, i) => {
         return {
             ...data[id],
-            id
+            id,
         }
     }).reverse()
 }
@@ -15,7 +13,4 @@ export const handlerDataFromDB = (data) => {
 export const validNumber = (number) => {
     number = parseInt(number)
     return typeof number === "number" && !isNaN(number)
-}
-export const imgReplacer = (e) => {
-    e.target.src = noImg;
 }
