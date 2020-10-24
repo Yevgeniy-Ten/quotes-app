@@ -1,4 +1,4 @@
-import {DB_QUOTES, HIDE_ALERT, HIDE_LOAD, SHOW_ALERT, SHOW_LOAD} from "./AppTypes";
+import {DB_QUOTES, HIDE_ALERT, HIDE_LOAD, SHOW_ALERT, SHOW_LOAD, REMOVE_QUOTE} from "./AppTypes";
 
 const handlers = {
     [SHOW_ALERT]: (state, {payload}) => ({...state, ...payload, alertIsShow: true}),
@@ -6,6 +6,7 @@ const handlers = {
     [SHOW_LOAD]: (state) => ({...state, isLoad: true}),
     [DB_QUOTES]: (state, {payload}) => ({...state, quotes: payload}),
     [HIDE_LOAD]: (state) => ({...state, isLoad: false}),
+    [REMOVE_QUOTE]: (state, {payload}) => ({...state, quotes: state.quotes.filter(quote => quote.id !== payload)}),
     DEFAULT: state => state,
 }
 

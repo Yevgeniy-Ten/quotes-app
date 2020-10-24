@@ -5,7 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Quote from "../../components/Quote/Quote"
 
 const Quotes = () => {
-    const {showLoad, hideLoad, handleQuotes, quotes} = useApp()
+    const {showLoad, hideLoad, handleQuotes, quotes, removeQuote} = useApp()
     useEffect(() => {
         showLoad()
         axios.get("/quotes.json").then(e => {
@@ -13,7 +13,7 @@ const Quotes = () => {
                 handleQuotes(e.data)
             }
         }).finally(hideLoad)
-        console.log(quotes)
+// eslint-disable-next-line
     }, [])
     return <><h1>All Quotes</h1>
         <ListGroup>
@@ -21,6 +21,7 @@ const Quotes = () => {
                 quotes.length ? quotes.map(quote => <Quote key={quote.id} author={quote.author}
                                                            date={quote.date}
                                                            id={quote.id}
+                                                           onRemove={removeQuote.bind(null, quote.id)}
                                                            descr={quote.description}
                                                            category={quote.category}/>) :
                     <ListGroup.Item variant="info">Quotes List Empty</ListGroup.Item>
