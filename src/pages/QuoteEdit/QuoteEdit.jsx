@@ -8,7 +8,6 @@ import {compareValues, validString} from "../../assets/helpers";
 
 const QuoteEdit = (props) => {
     const {showLoad, hideLoad, showAlert, hideAlert} = useApp()
-
     const [editableProduct, setEditableProduct] = useState({})
     const authorInput = useInputValue("")
     const quoteInput = useInputValue("")
@@ -34,7 +33,7 @@ const QuoteEdit = (props) => {
             hideAlert()
         }
         // eslint-disable-next-line
-    }, [])
+    }, [props.match.params])
 
     const updateEditableProduct = () => {
         const isValidUpdate = !compareValues(authorInput.value, editableProduct.author) || !compareValues(categoryInput.value, editableProduct.category) || !compareValues(quoteInput.value, editableProduct.description)

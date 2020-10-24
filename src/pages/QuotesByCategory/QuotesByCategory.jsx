@@ -21,8 +21,8 @@ const QuotesByCategory = (props) => {
         }).finally(hideLoad).catch(e => {
             showAlert("Some error", e.message)
         })
-// eslint-disable-next-line
-    }, [])
+        // eslint-disable-next-line
+    }, [props.match.params])
     return <>
         <h1>Category Page</h1>
         <ListGroup>

@@ -22,7 +22,7 @@ function App() {
                         <Route path="/add-quote" component={AddQuote}/>
                         <Route path="/quotes" exact component={Quotes}/>
                         <Route path="/quotes/:category" exact component={QuotesByCategory}/>
-                        <Route path="/quotes/:id/edit" exact component={QuoteEdit}/>
+                        <Route path="/quotes/:id/edit" component={QuoteEdit}/>
                         <Redirect from={"/" || ""} to="/quotes"/>
                     </Switch>
                 </Container>
