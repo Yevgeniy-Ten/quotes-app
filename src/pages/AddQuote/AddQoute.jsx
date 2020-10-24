@@ -12,13 +12,13 @@ const AddQuote = () => {
     const quoteInput = useInputValue("")
     const categoryInput = useInputValue("avengers")
     useEffect(() => {
+        hideAlert()
         return () => {
             hideAlert()
         }
         // eslint-disable-next-line
     }, [])
     const submitHandler = (e) => {
-        hideAlert()
         e.preventDefault()
         const isValidInputs = validString(authorInput.value) && validString(quoteInput.value)
         if (isValidInputs) {

@@ -7,6 +7,7 @@ import {Container} from "react-bootstrap";
 import {Switch, Route, Redirect} from "react-router-dom"
 import AddQuote from "../../pages/AddQuote/AddQoute";
 import Quotes from "../../pages/Quotes/Quotes";
+import QuoteEdit from "../../pages/QuoteEdit/QuoteEdit";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Switch>
                         <Route path="/add-quote" component={AddQuote}/>
                         <Route path="/quotes" exact component={Quotes}/>
+                        <Route path="/quotes/:id/edit" exact component={QuoteEdit}/>
                         <Redirect from={"/" || ""} to="/quotes"/>
                     </Switch>
                 </Container>

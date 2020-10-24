@@ -1,8 +1,10 @@
 import React from "react";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Button from "react-bootstrap/Button";
+import {Link} from "react-router-dom";
 
 const Quote = ({descr, date, author, id, category, onRemove}) => {
+    const URL = `/quotes/${id}/edit`
     return <ListGroupItem variant="info">
         <div className="d-flex justify-content-between align-items-center">
             <div className="mr-3">
@@ -12,7 +14,7 @@ const Quote = ({descr, date, author, id, category, onRemove}) => {
                 <p>Category: {category}</p>
             </div>
             <div className="QuoteBtns">
-                <button className="edit-btn btn btn-outline-secondary mr-2 p-3"/>
+                <Link to={URL} className="edit-btn btn btn-outline-secondary mr-2 p-3"/>
                 <Button onClick={onRemove} variant="outline-danger">&times;</Button>
             </div>
         </div>
