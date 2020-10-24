@@ -18,7 +18,7 @@ const AppNav = () => {
                     <Link className="dropdown-item" to="/quotes/avengers">Avengers</Link>
                     <NavDropdown.Divider/>
                     <Link className="dropdown-item" to="/quotes/saying">Saying</Link>
-                    <Link className="dropdown-item" to="/quotes/famous-people">Famous People</Link>
+                    <Link className="dropdown-item" to="/quotes/famouse-people">Famous People</Link>
                 </NavDropdown>
                 <NavLink to="/about" className="nav-link">About</NavLink>
             </Nav>
