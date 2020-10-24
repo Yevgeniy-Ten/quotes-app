@@ -19,12 +19,12 @@ const QuotesByCategory = (props) => {
                 props.history.replace("/")
             }
         }).finally(hideLoad).catch(e => {
-            showAlert("Some error", e.message)
+            showAlert("Some error " + e.message, "danger")
         })
         // eslint-disable-next-line
     }, [props.match.params])
     return <>
-        <h1>Category Page</h1>
+        <h1>Quotes by category</h1>
         <ListGroup>
             {
                 quotes.length ? quotes.map(quote => <Quote key={quote.id} author={quote.author}
