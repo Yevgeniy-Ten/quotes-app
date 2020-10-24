@@ -1,17 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import axios from "../../assets/instanse"
 import {useApp} from "../../containers/App/AppContext";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {useInputValue} from "../../assets/customHooks";
-import {compareValues, validString} from "../../assets/helpers";
+import {validString} from "../../assets/helpers";
 
 const QuoteEdit = (props) => {
-    const {showLoad, hideLoad, showAlert, hideAlert} = useApp()
-    const [editableProduct, setEditableProduct] = useState({})
-    const authorInput = useInputValue("")
-    const quoteInput = useInputValue("")
-    const categoryInput = useInputValue("")
+    const {showLoad, hideLoad, showAlert, hideAlert, editableQuote, setEditableQuote, updateEditableProduct} = useApp()
+    const authorInput = useInputValue(editableQuote.author)
+    const quoteInput = useInputValue(editableQuote.description)
+    const categoryInput = useInputValue(editableQuote.category)
     useEffect(() => {
         hideAlert()
         showLoad()
@@ -23,10 +22,10 @@ const QuoteEdit = (props) => {
                 props.history.replace("/")
             } else {
                 const quote = {...e.data, id}
-                setEditableProduct(quote)
+                setEditableQuote(quote)
                 authorInput.setValue(quote.author)
-                categoryInput.setValue(quote.category)
                 quoteInput.setValue(quote.description)
+                categoryInput.setValue(quote.category)
             }
         }).finally(hideLoad)
         return () => {
@@ -35,30 +34,11 @@ const QuoteEdit = (props) => {
         // eslint-disable-next-line
     }, [props.match.params])
 
-    const updateEditableProduct = () => {
-        const isValidUpdate = !compareValues(authorInput.value, editableProduct.author) || !compareValues(categoryInput.value, editableProduct.category) || !compareValues(quoteInput.value, editableProduct.description)
-        if (isValidUpdate) {
-            showLoad()
-            const URI = `/quotes/${editableProduct.id}.json`
-            const quote = {
-                ...editableProduct,
-                author: authorInput.value, category: categoryInput.value, description: quoteInput.value,
-            }
-            axios.put(URI, quote).then(() => {
-                setEditableProduct(quote)
-                showAlert("Quote data updated!")
-            }).catch(e => {
-                showAlert("Some error " + e.message)
-            }).finally(hideLoad)
-        } else {
-            showAlert("You not change quotes data!")
-        }
-    }
     const submitHandler = (e) => {
         e.preventDefault()
         const isValidInputs = validString(authorInput.value) && validString(quoteInput.value)
         if (isValidInputs) {
-            updateEditableProduct()
+            updateEditableProduct(authorInput.value, categoryInput.value, quoteInput.value)
         } else {
             showAlert("Fill the inputs, This Editing Page!")
         }

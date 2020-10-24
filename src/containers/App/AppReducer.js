@@ -5,7 +5,7 @@ import {
     SHOW_ALERT,
     SHOW_LOAD,
     REMOVE_QUOTE,
-    DESTROY_QUOTES,
+    DESTROY_QUOTES, NEW_EDITABLE_PRODUCT,
 } from "./AppTypes";
 
 const handlers = {
@@ -16,6 +16,7 @@ const handlers = {
     [HIDE_LOAD]: (state) => ({...state, isLoad: false}),
     [REMOVE_QUOTE]: (state, {payload}) => ({...state, quotes: state.quotes.filter(quote => quote.id !== payload)}),
     [DESTROY_QUOTES]: (state) => ({...state, quotes: []}),
+    [NEW_EDITABLE_PRODUCT]: (state, {payload}) => ({...state, editableQuote: payload}),
     DEFAULT: state => state,
 }
 

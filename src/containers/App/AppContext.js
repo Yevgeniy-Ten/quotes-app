@@ -7,9 +7,10 @@ import {
     HIDE_LOAD,
     REMOVE_QUOTE,
     SHOW_ALERT,
-    SHOW_LOAD
+    SHOW_LOAD,
+    NEW_EDITABLE_PRODUCT,
 } from "./AppTypes";
-import {handlerDataFromDB} from "../../assets/helpers";
+import {compareValues, handlerDataFromDB} from "../../assets/helpers";
 import axios from "../../assets/instanse"
 
 const AppContext = React.createContext()
@@ -19,6 +20,7 @@ const initialState = {
     alertIsShow: true,
     isLoad: false,
     quotes: [],
+    editableQuote: {},
 }
 const AppProvider = ({children}) => {
     const [state, dispatch] = useReducer(AppReducer, initialState)
@@ -76,10 +78,35 @@ const AppProvider = ({children}) => {
             showAlert("Sorry Error: " + e.message)
         }).finally(hideLoad)
     }
+    const setEditableQuote = (quote) => {
+        dispatch({
+            type: NEW_EDITABLE_PRODUCT,
+            payload: quote,
+        })
+    }
+    const updateEditableProduct = (author, category, description) => {
+        const isValidUpdate = !compareValues(description, state.editableQuote.description) || !compareValues(author, state.editableQuote.author) || !compareValues(category, state.editableQuote.category)
+        const URI = `/quotes/${state.editableQuote.id}.json`
+        showLoad()
+        if (isValidUpdate) {
+            const quote = {
+                ...state.editableQuote,
+                author, description, category
+            }
+            axios.put(URI, quote).then(() => {
+                setEditableQuote(quote)
+                showAlert("Quote data updated!")
+            }).catch(e => {
+                showAlert("Some error " + e.message)
+            }).finally(hideLoad)
+        } else {
+            showAlert("You not change quotes data!")
+        }
+    }
     return <AppContext.Provider value={{
         state, hideAlert, showAlert, showLoad, hideLoad, createQuoteData,
         handleQuotes, quotes: state.quotes, removeQuote,
-        editableProduct: state.editableProduct, destroyQuotes
+        editableQuote: state.editableQuote, destroyQuotes, setEditableQuote, updateEditableProduct
     }}>
         {children}
     </AppContext.Provider>
