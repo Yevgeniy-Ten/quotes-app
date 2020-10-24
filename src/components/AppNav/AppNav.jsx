@@ -11,6 +11,7 @@ const AppNav = () => {
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
                 <NavLink to="/quotes" className="nav-link">Quotes</NavLink>
+                <NavLink to="/add-quote" className="nav-link">Submit new quote</NavLink>
                 <NavLink to="/about" className="nav-link">About</NavLink>
                 <NavDropdown title="Quotes Category" id="basic-nav-dropdown">
                     <Link className="dropdown-item" to="/quotes/humor">Humor</Link>
