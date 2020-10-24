@@ -95,7 +95,7 @@ const AppProvider = ({children}) => {
             }
             axios.put(URI, quote).then(() => {
                 setEditableQuote(quote)
-                showAlert("Quote data updated!")
+                showAlert("Quote data updated!", "success")
             }).catch(e => {
                 showAlert("Some error " + e.message)
             }).finally(hideLoad)
