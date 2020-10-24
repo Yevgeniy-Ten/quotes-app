@@ -87,8 +87,8 @@ const AppProvider = ({children}) => {
     const updateEditableProduct = (author, category, description) => {
         const isValidUpdate = !compareValues(description, state.editableQuote.description) || !compareValues(author, state.editableQuote.author) || !compareValues(category, state.editableQuote.category)
         const URI = `/quotes/${state.editableQuote.id}.json`
-        showLoad()
         if (isValidUpdate) {
+            showLoad()
             const quote = {
                 ...state.editableQuote,
                 author, description, category
