@@ -1,6 +1,15 @@
 import React, {useContext, useReducer} from "react";
 import {AppReducer} from "./AppReducer";
-import {DB_QUOTES, HIDE_ALERT, HIDE_LOAD, NEW_EDITABLE_PRODUCT, REMOVE_QUOTE, SHOW_ALERT, SHOW_LOAD} from "./AppTypes";
+import {
+    DB_QUOTES,
+    DESTROY_QUOTES,
+    HIDE_ALERT,
+    HIDE_LOAD,
+    NEW_EDITABLE_PRODUCT,
+    REMOVE_QUOTE,
+    SHOW_ALERT,
+    SHOW_LOAD
+} from "./AppTypes";
 import {handlerDataFromDB, compareValues} from "../../assets/helpers";
 import axios from "../../assets/instanse"
 
@@ -75,6 +84,11 @@ const AppProvider = ({children}) => {
             payload: data,
         })
     }
+    const destroyQuotes = () => {
+        dispatch({
+            type: DESTROY_QUOTES,
+        })
+    }
     const removeQuote = (id) => {
         showLoad()
         const removeURI = `/quotes/${id}.json`
@@ -88,12 +102,11 @@ const AppProvider = ({children}) => {
         }).catch(e => {
             showAlert("Sorry Error: " + e.message)
         }).finally(hideLoad)
-
     }
     return <AppContext.Provider value={{
         state, hideAlert, showAlert, showLoad, hideLoad, createQuoteData,
         handleQuotes, quotes: state.quotes, removeQuote, setEditableProduct,
-        editableProduct: state.editableProduct, updateEditableProduct
+        editableProduct: state.editableProduct, updateEditableProduct, destroyQuotes
     }}>
         {children}
     </AppContext.Provider>

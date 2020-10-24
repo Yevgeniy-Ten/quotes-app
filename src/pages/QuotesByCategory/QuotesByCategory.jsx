@@ -1,24 +1,30 @@
 import React, {useEffect} from "react";
 import axios from "../../assets/instanse"
 import {useApp} from "../../containers/App/AppContext";
+import Quote from "../../components/Quote/Quote";
 import ListGroup from "react-bootstrap/ListGroup";
-import Quote from "../../components/Quote/Quote"
 
-const Quotes = () => {
-    const {showLoad, hideLoad, handleQuotes, quotes, removeQuote, hideAlert} = useApp()
+const QuotesByCategory = (props) => {
+    const {showLoad, hideLoad, handleQuotes, quotes, removeQuote, destroyQuotes, showAlert} = useApp()
     useEffect(() => {
+        const {category} = props.match.params;
+        const URI = `/quotes.json?orderBy="category"&equalTo="${category}"`
         showLoad()
-        axios.get("/quotes.json").then(e => {
-            if (e.data) {
+        axios.get(URI).then(e => {
+            if (Object.keys(e.data).length) {
                 handleQuotes(e.data)
+            } else {
+                destroyQuotes()
+                showAlert(`Quotes by ${category} not found!`)
+                props.history.replace("/")
             }
-        }).finally(hideLoad)
-        return () => {
-            hideAlert()
-        }
+        }).finally(hideLoad).catch(e => {
+            showAlert("Some error", e.message)
+        })
 // eslint-disable-next-line
     }, [])
-    return <><h1>All Quotes</h1>
+    return <>
+        <h1>Category Page</h1>
         <ListGroup>
             {
                 quotes.length ? quotes.map(quote => <Quote key={quote.id} author={quote.author}
@@ -32,4 +38,4 @@ const Quotes = () => {
         </ListGroup>
     </>
 }
-export default Quotes
+export default QuotesByCategory
