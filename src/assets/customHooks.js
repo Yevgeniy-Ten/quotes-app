@@ -10,6 +10,7 @@ export const useInputValue = (initialValue = "") => {
             value,
             onChange,
         },
+        setValue,
         clear: () => setValue(""),
         value,
     }

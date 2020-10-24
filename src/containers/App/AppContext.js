@@ -5,12 +5,11 @@ import {
     DESTROY_QUOTES,
     HIDE_ALERT,
     HIDE_LOAD,
-    NEW_EDITABLE_PRODUCT,
     REMOVE_QUOTE,
     SHOW_ALERT,
     SHOW_LOAD
 } from "./AppTypes";
-import {handlerDataFromDB, compareValues} from "../../assets/helpers";
+import {handlerDataFromDB} from "../../assets/helpers";
 import axios from "../../assets/instanse"
 
 const AppContext = React.createContext()
@@ -20,7 +19,6 @@ const initialState = {
     alertIsShow: true,
     isLoad: false,
     quotes: [],
-    editableProduct: {}
 }
 const AppProvider = ({children}) => {
     const [state, dispatch] = useReducer(AppReducer, initialState)
@@ -59,31 +57,6 @@ const AppProvider = ({children}) => {
             category, author, description, date: new Date().toLocaleDateString()
         }
     }
-    const updateEditableProduct = (author, category, description) => {
-        const isValidUpdate = !compareValues(author, state.editableProduct.author) || !compareValues(category, state.editableProduct.category) || !compareValues(description, state.editableProduct.description)
-        if (isValidUpdate) {
-            showLoad()
-            const URI = `/quotes/${state.editableProduct.id}.json`
-            const quote = {
-                ...state.editableProduct,
-                author, category, description
-            }
-            axios.put(URI, quote).then(() => {
-                setEditableProduct(quote)
-                showAlert("Quote data updated!")
-            }).catch(e => {
-                showAlert("Some error " + e.message)
-            }).finally(hideLoad)
-        } else {
-            showAlert("You not change quotes data!")
-        }
-    }
-    const setEditableProduct = (data) => {
-        dispatch({
-            type: [NEW_EDITABLE_PRODUCT],
-            payload: data,
-        })
-    }
     const destroyQuotes = () => {
         dispatch({
             type: DESTROY_QUOTES,
@@ -105,8 +78,8 @@ const AppProvider = ({children}) => {
     }
     return <AppContext.Provider value={{
         state, hideAlert, showAlert, showLoad, hideLoad, createQuoteData,
-        handleQuotes, quotes: state.quotes, removeQuote, setEditableProduct,
-        editableProduct: state.editableProduct, updateEditableProduct, destroyQuotes
+        handleQuotes, quotes: state.quotes, removeQuote,
+        editableProduct: state.editableProduct, destroyQuotes
     }}>
         {children}
     </AppContext.Provider>
