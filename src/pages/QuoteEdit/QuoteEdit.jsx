@@ -31,7 +31,7 @@ const QuoteEdit = (props) => {
             hideAlert()
         }
         // eslint-disable-next-line
-    }, [props.match.params])
+    }, [props.match.params.id])
 
     const submitHandler = (e) => {
         e.preventDefault()

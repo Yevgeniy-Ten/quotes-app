@@ -22,7 +22,7 @@ const QuotesByCategory = (props) => {
             showAlert("Some error " + e.message, "danger")
         })
         // eslint-disable-next-line
-    }, [props.match.params])
+    }, [props.match.params.category])
     return <>
         <h1>Quotes by category</h1>
         <ListGroup>
